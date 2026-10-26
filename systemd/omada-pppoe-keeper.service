@@ -1,0 +1,21 @@
+[Unit]
+Description=Omada PPPoE Keeper
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+EnvironmentFile=/etc/omada-pppoe-keeper.env
+ExecStart=/opt/omada-pppoe-keeper/venv/bin/python /opt/omada-pppoe-keeper/omada-pppoe-keeper.py
+StateDirectory=omada-pppoe-keeper
+TimeoutStartSec=5min
+# Härtung
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
